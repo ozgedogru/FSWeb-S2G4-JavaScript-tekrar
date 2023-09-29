@@ -100,11 +100,29 @@ var ucetambolunenler,
   tekraredensayilar;
 
 //3a çözümü:
+const kucukBuyukSayi = (arr) => {
+  enbuyuk = arr[0];
+  enkucuk = arr[0];
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > enbuyuk) {
+      enbuyuk = arr[i];
+    }
+    if (arr[i] < enkucuk) {
+      enkucuk = arr[i];
+    }
+  }
+  return [enbuyuk, enkucuk];
+};
 
-console.log("Dizideki en buyuk eleman: ", enbuyuk);
+console.log("Dizideki en buyuk ve en kucuk eleman: ", kucukBuyukSayi(sayilar));
 // 3b çözümü:
 
-ucetambolunenler = sayilar.filter((sayi) => sayi % 3 == 0);
+ucetambolunenler = [];
+sayilar.forEach((sayi) => {
+  if (sayi % 3 === 0) {
+    ucetambolunenler.push(sayi);
+  }
+});
 console.log("Uce tam bolunen sayilar: ", ucetambolunenler);
 
 //3c çözümü:
@@ -129,6 +147,26 @@ siralisayilar = besyuzdenkucuksayilar.sort(function (a, b) {
 console.log("500'den kucuk sirali sayilar", siralisayilar);
 
 //3f çözümü
+
+tekraredensayilar = sayilar.reduce((tekrarObj, sayi) => {
+  if (tekrarObj[sayi]) {
+    tekrarObj[sayi] = tekrarObj[sayi] + 1;
+  } else {
+    tekrarObj[sayi] = 1;
+  }
+  return tekrarObj;
+}, {});
+
+const resultArr = [];
+for (const key in tekraredensayilar) {
+  if (tekraredensayilar[key] > 1) {
+    resultArr.push(
+      `${key} sayısı ${tekraredensayilar[key]} kere tekrar edilmiştir`
+    );
+  }
+}
+
+console.log("Dizide tekrar eden sayilar", resultArr);
 
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
 function sa() {
